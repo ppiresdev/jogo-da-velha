@@ -1,0 +1,142 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(
+    90deg,
+    rgb(122, 123, 97) 0%,
+    rgb(103, 87, 52) 100%
+  );
+  overflow: hidden;
+}
+
+.tabuleiro {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+/* Casa */
+.casa {
+  width: 100px;
+  height: 100px;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/*Montar tabuleiro*/
+
+.casa:nth-child(1),
+.casa:nth-child(2),
+.casa:nth-child(3) {
+  border-top: none;
+}
+
+.casa:nth-child(1),
+.casa:nth-child(4),
+.casa:nth-child(7) {
+  border-left: none;
+}
+
+.casa:nth-child(7),
+.casa:nth-child(8),
+.casa:nth-child(9) {
+  border-bottom: none;
+}
+
+.casa:nth-child(3),
+.casa:nth-child(6),
+.casa:nth-child(9) {
+  border-right: none;
+}
+
+.X::before {
+  font-family: "FontAwesome";
+  font-size: 5rem;
+  content: "\f00d";
+}
+
+.circulo::before {
+  font-family: "FontAwesome";
+  font-size: 4rem;
+  content: "\f111";
+}
+
+/*Não deixa jogar em casas já preenchidas*/
+.casa.X,
+.casa.circulo {
+  cursor: not-allowed;
+}
+
+/* 
+Classes usadas na div tabuleiro para controlar quem está jogando
+XX    => é a vez do X jogar
+circ  => é a vez do O jogar */
+
+.tabuleiro.XX .casa:not(.circulo):not(.X):hover::before {
+  font-family: "FontAwesome";
+  font-size: 5rem;
+  content: "\f00d";
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.tabuleiro.circ .casa:not(.circulo):not(.X):hover::before {
+  font-family: "FontAwesome";
+  font-size: 4rem;
+  content: "\f111";
+  color: rgba(0, 0, 0, 0.25);
+}
+
+/*Mensagens*/
+
+.msg-vencedor {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/*Botão*/
+.btn-novoJogo {
+  font-size: 2.5rem;
+  background-color: rgb(72, 168, 78);
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  margin-top: 16px;
+  color: white;
+}
+
+.btn-novoJogo:hover {
+  background-color: white;
+  color: rgb(72, 168, 78);
+}
+
+/*Mensagem do resultado do jogo*/
+.msg-vencedor-text {
+  color: crimson;
+  font-size: 5rem;
+  background-color: aliceblue;
+  padding: 5px;
+  border-radius: 10px;
+}
